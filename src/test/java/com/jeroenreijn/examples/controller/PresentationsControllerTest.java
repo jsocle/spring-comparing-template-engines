@@ -25,7 +25,7 @@ public class PresentationsControllerTest {
 
   @Test
   public void should_return_other_view() throws Exception {
-    final String view = controller.showList("test", modelMap);
+    final String view = controller.showList("test", null, modelMap);
     assertEquals("index-test", view);
   }
 

@@ -29,6 +29,7 @@
     <spring-rythm.version>1.0</spring-rythm.version>
     <pebble-spring3.version>1.4.5</pebble-spring3.version>
     <mustache-spring-view.version>1.2</mustache-spring-view.version>
+    <kotlin.version>0.12.613</kotlin.version>
   </properties>
 
   <dependencies>
@@ -187,6 +188,18 @@
       <version>1.6.6</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.jsocle</groupId>
+      <artifactId>jsocle-html</artifactId>
+      <version>b49b7e3d74</version>
+    </dependency>
+
     <!-- Test -->
 
     <dependency>
@@ -219,9 +232,33 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
+      <plugin>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <version>${kotlin.version}</version>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <artifactId>kotlin-maven-plugin</artifactId>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <version>${kotlin.version}</version>
+
+          <executions>
+            <execution>
+              <id>compile</id>
+              <phase>process-sources</phase>
+              <goals> <goal>compile</goal> </goals>
+            </execution>
+
+            <execution>
+              <id>test-compile</id>
+              <phase>process-test-sources</phase>
+              <goals> <goal>test-compile</goal> </goals>
+            </execution>
+          </executions>
+        </plugin>
         <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
           <artifactId>tomcat7-maven-plugin</artifactId>
@@ -330,6 +367,7 @@
           <configuration>
             <source>1.8</source>
             <target>1.8</target>
+
           </configuration>
         </plugin>
         <plugin>
@@ -383,6 +421,10 @@
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
+    </repository>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
     </repository>
   </repositories>
 </project>
